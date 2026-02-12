@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.lorislab.lib</groupId>
+        <artifactId>lorislab-lib-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>org.lorislab.ms</groupId>
+    <artifactId>lorislab-ms-parent</artifactId>
+    <version>999-SNAPSHOT</version>
+    <name>lorislab-ms-parent</name>
+    <packaging>pom</packaging>
+
+    <description>Lorislab microservice parent</description>
+    <url>https://github.com/lorislab/lorislab-ms-parent</url>
+
+    <organization>
+        <name>lorislab</name>
+        <url>https://lorislab.org</url>
+    </organization>
+
+    <developers>
+        <developer>
+        <id>andrejpetras</id>
+        <name>Andrej Petras</name>
+        <organization>lorislab</organization>
+        <organizationUrl>https://lorislab.org</organizationUrl>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+        <name>Apache License, Version 2.0</name>
+        <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:lorislab/lorislab-ms-parent.git</connection>
+        <developerConnection>scm:git:git@github.com:lorislab/lorislab-ms-parent.git</developerConnection>
+        <url>https://github.com/lorislab/lorislab-ms-parent</url>
+    </scm>
+
+    <properties>
+        <!-- build -->
+        <format.skip>false</format.skip>
+        <enforcer.skip>false</enforcer.skip>
+        <skipTests>false</skipTests>
+        <skipITs>${skipTests}</skipITs>
+        <skipUTs>${skipTests}</skipUTs>
+        <skipDocs>false</skipDocs>
+
+        <!-- Quarkus configuration -->
+        <quarkus.version>3.31.3</quarkus.version>
+
+        <!-- Maven configuration -->
+        <maven.compiler-plugin.version>3.15.0</maven.compiler-plugin.version>
+        <maven.surefire-plugin.version>3.5.4</maven.surefire-plugin.version>
+
+        <!-- Other -->
+        <openapitools.openapi-generator-maven-plugin.version>7.19.0</openapitools.openapi-generator-maven-plugin.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
+        <assertj.version>3.27.7</assertj.version>
+        <htmlunit.version>4.21.0</htmlunit.version>
+
+        <!-- Jacoco/Sonar -->
+        <sonar.cpd.exclusions>**/mapper/**,**/mappers/**,**/dtos/**,**/dto/**,**/gen/**</sonar.cpd.exclusions>
+        <sonar.coverage.exclusions>**/model*/**/*.*,**/resources/**/*.*,**/mapper/**,**/mappers/**,**/gen/**,**/dtos/**,**/dto/**,**/*$Error.class,**/*$*Exception.class</sonar.coverage.exclusions>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-bom</artifactId>
+                <version>${quarkus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.htmlunit</groupId>
+                <artifactId>htmlunit</artifactId>
+                <version>${htmlunit.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Build -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-arc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-container-image-docker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jacoco</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit-mockito</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit-config</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit-component</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-maven-plugin</artifactId>
+                <version>${quarkus.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <properties>
+                        <quarkus.container-image.build>true</quarkus.container-image.build>
+                        <quarkus.container-image.group>localhost</quarkus.container-image.group>
+                    </properties>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler-plugin.version}</version>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                        <arg>-Amapstruct.defaultComponentModel=jakarta-cdi</arg>
+                        <arg>-Amapstruct.defaultInjectionStrategy=constructor</arg>
+                        <arg>-Amapstruct.unmappedTargetPolicy=ERROR</arg>
+                        <arg>-Amapstruct.unmappedSourcePolicy=IGNORE</arg>
+                    </compilerArgs>
+                    <annotationProcessorPaths>
+                        <annotationProcessorPath>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </annotationProcessorPath>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire-plugin.version}</version>
+                <configuration>
+                    <skipTests>${skipUTs}</skipTests>
+                    <argLine>@{argLine}</argLine>
+                    <systemPropertyVariables>
+                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <maven.home>${maven.home}</maven.home>
+                        <quarkus.jacoco.excludes>${sonar.coverage.exclusions}</quarkus.jacoco.excludes>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven.surefire-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <skipTests>${skipTests}</skipTests>
+                            <skipITs>${skipITs}</skipITs>
+                            <argLine>@{argLine}</argLine>
+                            <systemPropertyVariables>
+                                <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+                                <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <maven.home>${maven.home}</maven.home>
+                                <quarkus.jacoco.excludes>${sonar.coverage.exclusions}</quarkus.jacoco.excludes>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>native</id>
+            <activation>
+                <property>
+                    <name>native</name>
+                </property>
+            </activation>
+            <properties>
+                <skipITs>false</skipITs>
+                <quarkus.native.enabled>true</quarkus.native.enabled>
+            </properties>
+        </profile>
+    </profiles> 
+</project>	    
