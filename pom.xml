@@ -63,11 +63,15 @@
         <maven.compiler-plugin.version>3.15.0</maven.compiler-plugin.version>
         <maven.surefire-plugin.version>3.5.4</maven.surefire-plugin.version>
 
+        <!-- lorislab -->
+        <lorislab.sql.data.version>0.1.0</lorislab.sql.data.version>
+
         <!-- Other -->
         <openapitools.openapi-generator-maven-plugin.version>7.19.0</openapitools.openapi-generator-maven-plugin.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <assertj.version>3.27.7</assertj.version>
         <htmlunit.version>4.21.0</htmlunit.version>
+        <awaitility.version>4.3.0</awaitility.version>
 
         <!-- Jacoco/Sonar -->
         <sonar.cpd.exclusions>**/mapper/**,**/mappers/**,**/dtos/**,**/dto/**,**/gen/**</sonar.cpd.exclusions>
@@ -90,6 +94,11 @@
                 <type>jar</type>
             </dependency>
             <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
                 <version>${assertj.version}</version>
@@ -99,6 +108,16 @@
                 <artifactId>htmlunit</artifactId>
                 <version>${htmlunit.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.lorislab.lib</groupId>
+                <artifactId>lorislab-sql-data</artifactId>
+                <version>${lorislab.sql.data.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.lorislab.lib</groupId>
+                <artifactId>lorislab-sql-data-codegen</artifactId>
+                <version>${lorislab.sql.data.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -159,9 +178,35 @@
             <artifactId>htmlunit</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.openapitools</groupId>
+                    <artifactId>openapi-generator-maven-plugin</artifactId>
+                    <version>${openapitools.openapi-generator-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>io.quarkus</groupId>
