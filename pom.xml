@@ -67,7 +67,7 @@
         <lorislab.sql.data.version>0.1.0</lorislab.sql.data.version>
 
         <!-- Other -->
-        <openapitools.openapi-generator-maven-plugin.version>7.19.0</openapitools.openapi-generator-maven-plugin.version>
+        <openapitools.openapi-generator-maven-plugin.version>7.20.0</openapitools.openapi-generator-maven-plugin.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <assertj.version>3.27.7</assertj.version>
         <htmlunit.version>4.21.0</htmlunit.version>
