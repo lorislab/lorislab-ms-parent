@@ -61,7 +61,7 @@
 
         <!-- Maven configuration -->
         <maven.compiler-plugin.version>3.15.0</maven.compiler-plugin.version>
-        <maven.surefire-plugin.version>3.5.4</maven.surefire-plugin.version>
+        <maven.surefire-plugin.version>3.5.5</maven.surefire-plugin.version>
 
         <!-- lorislab -->
         <lorislab.sql.data.version>0.1.0</lorislab.sql.data.version>
